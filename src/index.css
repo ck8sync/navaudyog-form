@@ -1,0 +1,82 @@
+@import 'tailwindcss';
+
+@layer base {
+  html,
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-text);
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply min-h-12 cursor-pointer rounded-xl bg-(--accent) px-6 font-semibold text-(--accent-text) transition active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-40;
+  }
+  .btn-ghost {
+    @apply min-h-12 cursor-pointer rounded-xl px-4 font-medium text-(--muted) transition hover:text-(--text);
+  }
+  .btn-link {
+    @apply cursor-pointer rounded-md px-2 py-1 text-xs font-semibold text-(--accent) hover:underline;
+  }
+  .card {
+    @apply overflow-hidden rounded-2xl border border-(--border) bg-(--surface);
+  }
+  .input {
+    @apply min-h-12 w-full rounded-xl border border-(--border) bg-(--surface) px-4 text-sm text-(--text) transition outline-none placeholder:text-(--muted)/60 focus:border-(--accent) focus:ring-4 focus:ring-(--accent)/15;
+  }
+  .input-err {
+    @apply border-(--danger) focus:border-(--danger) focus:ring-(--danger)/15;
+  }
+  .chip {
+    @apply min-h-11 cursor-pointer rounded-full border border-(--border) bg-(--surface) px-4 text-sm font-medium transition hover:border-(--muted) active:scale-95;
+  }
+  .chip-on {
+    @apply border-(--accent) bg-(--accent) text-(--accent-text) hover:border-(--accent);
+  }
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.wheel {
+  mask-image: linear-gradient(transparent, #000 30%, #000 70%, transparent);
+}
+
+.safe-bottom {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+
+.fade {
+  animation: fade 0.25s ease-out;
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
